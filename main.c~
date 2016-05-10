@@ -1,20 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "funciones.c"
 #define ITERACIONES 4
 #define EJEX 6
 #define EJEY 5
 #define MATRIZDATO {{0,1,0,0,0},{0,0,1,0,0},{1,1,1,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}}
 
-#include "funciones.c"
+int matriz [EJEX][EJEY] = MATRIZDATO;
 
 int main()
 {
-  int matriz [EJEX][EJEY] = MATRIZDATO;
   int n;
-  imprimematriz(matriz);
+  imprimematriz();
   for(n=0; n < ITERACIONES; n++) {
-    siguientematriz(matriz);
-    imprimematriz(matriz);
+    siguientematriz();
+    imprimematriz();
   }
   return 0;
 }
