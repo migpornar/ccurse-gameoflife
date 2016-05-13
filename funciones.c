@@ -30,12 +30,33 @@ int arreglaindicesj(int j)
   return(j);
 }
 
+int cerounoaleatorio()
+{
+  return (rand() % 2);
+}
+
 int estadocelula(int matriz[EJEX][EJEY],int i, int j)
 {
   i = arreglaindicesi(i);
   j = arreglaindicesj(j);
   return (matriz[i][j]);
 }
+
+int numerovecinos(int matriz [EJEX][EJEY], int i, int j)
+{
+  int suma;
+  suma = 0; 
+  suma =        estadocelula(matriz, i-1, j-1);
+  suma = suma + estadocelula(matriz, i  , j-1);
+  suma = suma + estadocelula(matriz, i+1, j-1);
+  suma = suma + estadocelula(matriz, i-1, j  );
+  suma = suma + estadocelula(matriz, i+1, j  );
+  suma = suma + estadocelula(matriz, i-1, j+1);
+  suma = suma + estadocelula(matriz, i  , j+1);
+  suma = suma + estadocelula(matriz, i+1, j+1);
+  return(suma);
+}
+  
 
 void siguientematriz(int matriz [EJEX][EJEY])
  {
@@ -45,16 +66,7 @@ void siguientematriz(int matriz [EJEX][EJEY])
    int suma;
    for(i=0; i < EJEX; i++) {
      for (j=0; j < EJEY; j++) {
-       //CALCULA LA CANTIDAD DE CELULAS VIVAS ALREDEDOR DE [i][j]
-       suma = 0; 
-       suma =        estadocelula(matriz, i-1, j-1);
-       suma = suma + estadocelula(matriz, i  , j-1);
-       suma = suma + estadocelula(matriz, i+1, j-1);
-       suma = suma + estadocelula(matriz, i-1, j  );
-       suma = suma + estadocelula(matriz, i+1, j  );
-       suma = suma + estadocelula(matriz, i-1, j+1);
-       suma = suma + estadocelula(matriz, i  , j+1);
-       suma = suma + estadocelula(matriz, i+1, j+1);
+       suma = numerovecinos(matriz, i, j);
        if(estadocelula(matriz,i,j) == 1) //SI LA CELULA ESTA VIVA
 	 {
 	   if ((suma == 2)||(suma == 3))
