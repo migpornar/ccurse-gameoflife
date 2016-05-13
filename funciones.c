@@ -12,6 +12,30 @@ void imprimematriz(int matriz [EJEX][EJEY])
   printf("\n \n");
 }
 
+int arreglaindicesi(int i)
+{
+  if (i == EJEX)
+    i = 0;
+  if (i == -1)
+    i = EJEX -1;
+  return(i);
+}
+      
+int arreglaindicesj(int j)
+{
+  if (j == EJEY)
+    j = 0;
+  if (j == -1)
+    j = EJEY -1;
+  return(j);
+}
+
+int estadocelula(int matriz[EJEX][EJEY],int i, int j)
+{
+  i = arreglaindicesi(i);
+  j = arreglaindicesj(j);
+  return (matriz[i][j]);
+}
 
 void siguientematriz(int matriz [EJEX][EJEY])
  {
@@ -23,30 +47,20 @@ void siguientematriz(int matriz [EJEX][EJEY])
      for (j=0; j < EJEY; j++) {
        //CALCULA LA CANTIDAD DE CELULAS VIVAS ALREDEDOR DE [i][j]
        suma = 0; 
-       if (((i-1)>=0) && ((j-1)>=0))
-	 suma = matriz[i-1][j-1];
-       if ((j-1)>=0)
-	 suma = suma + matriz[i][j-1];
-       if (((i+1)<EJEX) && ((j-1)>=0))
-	 suma = suma + matriz[i+1][j-1];
-       if ((i-1)>=0)
-	 suma = suma + matriz[i-1][j];
-       if ((i+1)<EJEX)
-	 suma = suma + matriz[i+1][j];
-       if (((i-1)>=0) && ((j+1)<EJEY))
-	 suma = suma + matriz[i-1][j+1];
-       if ((j+1)<EJEY)
-	 suma = suma + matriz[i][j+1];
-       if (((i+1)<EJEX) && ((j+1)<EJEY))
-	 suma = suma + matriz[i+1][j+1];
-	  
-       if(matriz[i][j] == 1) //SI LA CELULA ESTA VIVA
+       suma =        estadocelula(matriz, i-1, j-1);
+       suma = suma + estadocelula(matriz, i  , j-1);
+       suma = suma + estadocelula(matriz, i+1, j-1);
+       suma = suma + estadocelula(matriz, i-1, j  );
+       suma = suma + estadocelula(matriz, i+1, j  );
+       suma = suma + estadocelula(matriz, i-1, j+1);
+       suma = suma + estadocelula(matriz, i  , j+1);
+       suma = suma + estadocelula(matriz, i+1, j+1);
+       if(estadocelula(matriz,i,j) == 1) //SI LA CELULA ESTA VIVA
 	 {
 	   if ((suma == 2)||(suma == 3))
 	     matrizsig[i][j] = 1;
 	   else 
 	     matrizsig[i][j] = 0;
-	
 	 } else { //SI LA CELULA ESTA MUERTA
 	 if (suma == 3)
 	   matrizsig[i][j] = 1;
@@ -55,7 +69,6 @@ void siguientematriz(int matriz [EJEX][EJEY])
        }
      }
    }
-
    for(i=0; i < EJEX; i++) {
      for (j=0; j < EJEY; j++)
        matriz[i][j] = matrizsig [i][j];
