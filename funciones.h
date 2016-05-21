@@ -1,15 +1,19 @@
 #include <stdio.h>
 
+void siguientematriz(int **matriz, int ejex, int ejey);
 
+void imprimematriz(int **matriz, int ejex, int ejey);
 
-void siguientematriz(int matriz [EJEX][EJEY]);
+int arreglaindicesi(int i, int ejex);
 
-void imprimematriz(int matriz [EJEX][EJEY]);
+int arreglaindicesj(int j, int ejey);
 
 int cerounoaleatorio();
 
-int arreglaindicesi(int i);
+int numerovecinos(int **matriz, int i, int j,int ejex, int ejey);
 
-int arreglaindicesj(int j);
+int arreglaindicesi(int i, int ejex);
 
-int estadocelula(int matriz[EJEX][EJEY],int i, int j);
+int arreglaindicesj(int j, int ejey);
+
+int estadocelula(int **matriz,int i, int j, int ejex, int ejey);
